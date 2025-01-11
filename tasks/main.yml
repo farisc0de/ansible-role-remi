@@ -1,0 +1,11 @@
+---
+- name: Import Remi GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ remi_gpg_key_url }}"
+
+- name: Install Remi repository release package
+  ansible.builtin.dnf:
+    name: "{{ remi_package_url }}"
+    state: present
+  notify: Update package cache
